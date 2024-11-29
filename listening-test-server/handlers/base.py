@@ -79,9 +79,9 @@ class BaseHandler(tornado.web.RequestHandler, ABC):
                 raise tornado.web.Finish
         elif check_activated:
             user = self.db['users'].find_one({'_id': user_id})
-            if 'activated' not in user or not user['activated']:
-                self.set_error(401, "Your email hasn't been confirmed, you can resend confirmation code in dashboard")
-                raise tornado.web.Finish
+            # if 'activated' not in user or not user['activated']:
+            #     self.set_error(401, "Your email hasn't been confirmed, you can resend confirmation code in dashboard")
+            #     raise tornado.web.Finish
         # If no exception raised
         return user_id
 
