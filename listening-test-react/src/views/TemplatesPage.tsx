@@ -26,6 +26,7 @@ export default function () {
       <Tab label="AB Test" value='ab-test'/>
       <Tab label="Acr Test" value='acr-test'/>
       <Tab label="Mushra Test" value='mushra-test'/>
+      <Tab label="Ape Test" value='ape-test'/>
       <Tab label="Hearing Sensitivity Test" value='hearing-test'/>
     </Tabs>
     <Box paddingTop={2}>

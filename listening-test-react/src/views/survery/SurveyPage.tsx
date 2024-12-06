@@ -203,6 +203,7 @@ function useSurveyRenderItem(testUrl: TestUrl): { validateError: (item: BasicTas
         return questionedExValidateError;
       case 'acr-test':
       case 'mushra-test':
+      case 'ape-test':
       case 'hearing-test':
         return sliderItemValidateError;
       default:

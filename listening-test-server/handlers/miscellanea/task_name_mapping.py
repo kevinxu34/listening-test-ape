@@ -20,6 +20,8 @@ def switch_response_collection(self: BaseHandler, test_type: str) -> Optional[Co
         return self.db['acrSurveys']
     elif test_type == 'mushra-test':
         return self.db['mushraSurveys']
+    elif test_type == 'ape-test':
+        return self.db['apeSurveys']
     elif test_type == 'hearing-test':
         return self.db['hearingSurveys']
     elif test_type == 'audio-labeling':
@@ -50,6 +52,8 @@ def switch_task_collection(self: BaseHandler, test_type: str) -> Optional[Collec
         return self.db['acrTests']
     elif test_type == 'mushra-test':
         return self.db['mushraTests']
+    elif test_type == 'ape-test':
+        return self.db['apeTests']
     elif test_type == 'hearing-test':
         return self.db['hearingTests']
     elif test_type == 'audio-labeling':
@@ -79,6 +83,8 @@ def get_task_url_by_collection(collection_name: str):
         return 'acr-test'
     elif collection_name == 'mushraTests':
         return 'mushra-test'
+    elif collection_name == 'apeTests':
+        return 'ape-test'
     elif collection_name == 'hearingTests':
         return 'hearing-test'
     elif collection_name == 'audioLabelingTasks':

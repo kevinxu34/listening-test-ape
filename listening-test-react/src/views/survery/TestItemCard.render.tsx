@@ -9,6 +9,7 @@ import {ImageAbExampleRender} from "../../components/image/ImageAb/ImageAbExampl
 import {VideoLabelingExampleRender} from "../../components/video/VideoLabeling/VideoLabelingExample.render";
 import {VideoAbExampleRender} from "../../components/video/VideoAb/VideoAbExample.render";
 import {MushraTestItemExampleRender} from "../../components/audio/Mushra/MushraTestItemExample.render";
+import {ApeTestItemExampleRender} from "../../components/audio/Ape/ApeTestItemExample.render";
 import {AudioTestItemTraining} from "../../components/audio/AudioTestItemTraining.render";
 import {AcrTestItemExampleRender} from "../../components/audio/AcrTest/AcrTestItemExample.render";
 import {BasicTaskItemModel} from "../../shared/models/BasicTaskModel";
@@ -26,6 +27,8 @@ export const TestItemCardRender = observer(function (props: { item: BasicTaskIte
       case "audio-labeling": // Only use training render of acr
       case "mushra-test":
         return <MushraTestItemExampleRender example={item.example} {...rest}/>;
+      case "ape-test":
+        return <ApeTestItemExampleRender example={item.example} {...rest}/>;
       case "hearing-test":
         return <HearingTestItemExampleRender value={item.example} {...rest}/>;
       case "image-labeling":

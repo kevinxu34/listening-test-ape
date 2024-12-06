@@ -5,6 +5,7 @@ import {HearingTestItemExampleCard} from "./audio/HearingTest/HearingTestItemExa
 import {AudioTestItemTraining} from "./audio/AudioTestItemTraining";
 import {BasicExampleModel} from "../shared/models/BasicTaskModel";
 import {MushraTestItemExampleCard} from "./audio/Mushra/MushraTestItemExampleCard";
+import {ApeTestItemExampleCard} from "./audio/Ape/ApeTestItemExampleCard";
 import {ImageLabelingExampleItem} from "./image/ImageLabeling/ImageLabelingExampleItem";
 import {ImageAbExampleItem} from "./image/ImageAb/ImageAbExampleItem";
 import {AcrTestItemExampleCard} from "./audio/AcrTest/AcrTestItemExampleCard";
@@ -12,6 +13,7 @@ import {TestDetailView} from "../views/test-list/test-details/TestDetailView";
 import {AbAddItemButtonGroup} from "./audio/AbTest/AbAddItemButtonGroup";
 import {AcrAddItemButtonGroup} from "./audio/AcrTest/AcrAddItemButtonGroup";
 import {MushraAddItemButtonGroup} from "./audio/Mushra/MushraAddItemButtonGroup";
+import {ApeAddItemButtonGroup} from "./audio/Ape/ApeAddItemButtonGroup";
 import {HearingAddItemButtons} from "./audio/HearingTest/HearingAddItemButtons";
 import {AudioLabelingButtonGroup} from "./audio/AudioLabeling/AudioLabelingButtonGroup";
 import {ImageLabelingButtonGroup} from "./image/ImageLabeling/ImageLabelingButtonGroup";
@@ -32,6 +34,8 @@ export function overrideExampleItem(testUrl: TestUrl): TestItemExampleCardType {
       return AcrTestItemExampleCard;
     case "mushra-test":
       return MushraTestItemExampleCard;
+    case "ape-test":
+      return ApeTestItemExampleCard;
     case "hearing-test":
       return HearingTestItemExampleCard;
     case "image-labeling":
@@ -52,6 +56,7 @@ export function overrideTrainingItem(testUrl: TestUrl): TestItemExampleCardType 
     case "ab-test":
     case "acr-test":
     case "mushra-test":
+    case "ape-test":
     case "hearing-test":
     case "audio-labeling": // Special task type, using training as example
       return AudioTestItemTraining
@@ -69,6 +74,8 @@ export function TestDetailViewWrapper({testUrl}: { testUrl: TestUrl }) {
       return <TestDetailView testUrl={testUrl} ButtonGroup={AcrAddItemButtonGroup}/>
     case "mushra-test":
       return <TestDetailView testUrl={testUrl} ButtonGroup={MushraAddItemButtonGroup}/>
+    case "ape-test":
+      return <TestDetailView testUrl={testUrl} ButtonGroup={ApeAddItemButtonGroup}/>
     case "hearing-test":
       return <TestDetailView testUrl={testUrl} ButtonGroup={HearingAddItemButtons}/>
     case "audio-labeling":

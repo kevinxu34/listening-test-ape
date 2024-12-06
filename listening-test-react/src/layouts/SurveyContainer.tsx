@@ -71,6 +71,9 @@ export default function SurveyContainer() {
               <Route exact path={`${path}/mushra-test/:id`}>
                 <SurveyPage testUrl="mushra-test" />
               </Route>
+              <Route exact path={`${path}/ape-test/:id`}>
+                <SurveyPage testUrl="ape-test" />
+              </Route>
               <Route exact path={`${path}/hearing-test/:id`}>
                 <SurveyPage testUrl="hearing-test" />
               </Route>

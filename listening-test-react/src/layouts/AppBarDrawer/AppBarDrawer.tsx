@@ -45,6 +45,7 @@ export function AppBarDrawer(props: any) {
     <ListItemNavLink to={`${path}/ab-test`} icon='headset'>Audio AB</ListItemNavLink>
     <ListItemNavLink to={`${path}/acr-test`} icon='music_note'>Audio ACR</ListItemNavLink>
     <ListItemNavLink to={`${path}/mushra-test`} icon='linear_scale'>Audio MUSHRA</ListItemNavLink>
+    <ListItemNavLink to={`${path}/ape-test`} icon='linear_scale'>Audio APE</ListItemNavLink>
     <ListItemNavLink to={`${path}/audio-labeling`} icon='label_important'>Audio Labelling</ListItemNavLink>
     <ListItemNavLink to={`${path}/hearing-test`} icon='hearing'>Hearing Test (Beta)</ListItemNavLink>
     <Divider/>
@@ -62,9 +63,9 @@ export function AppBarDrawer(props: any) {
   </List>
 
   const container = window !== undefined ? () => window().document.body : undefined;
-  const testUrls = ['ab-test', 'acr-test', 'mushra-test', 'hearing-test', 'audio-labeling', 'image-labeling', 'image-ab', 'video-labeling', 'video-ab'] as TestUrl[];
+  const testUrls = ['ab-test', 'acr-test', 'mushra-test', 'ape-test', 'hearing-test', 'audio-labeling', 'image-labeling', 'image-ab', 'video-labeling', 'video-ab'] as TestUrl[];
   const testUrlsWithTitle = [
-    ['ab-test', 'AB Test'], ['acr-test', 'ACR Test'], ['mushra-test', 'MUSHRA Test'],
+    ['ab-test', 'AB Test'], ['acr-test', 'ACR Test'], ['mushra-test', 'MUSHRA Test'], ['ape-test', 'APE Test'],
     ['hearing-test', 'Hearing Sensitivity Test'], ['audio-labeling', 'Audio Labeling Task'],
     ['image-labeling', 'Image Labeling Task'], ['image-ab', 'Image AB Task'], ['video-labeling', 'Video Labeling Task'],
     ['video-ab', 'Video AB Task']
