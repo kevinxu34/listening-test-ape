@@ -32,7 +32,7 @@ export const ApeTestItemExampleRender = observer(function (props: { example: Aud
       </Grid>)}
 
       {randomAudios.map((v, i) => <Grid item key={i} style={ratingAreaStyle}>
-        <MusharaRatingBar audio={v}/>
+        <ApeRatingBar audio={v}/>
         <AudioButton ref={refs[i]} audio={v} onPlay={handlePlay} onPause={handlePause}
                      onEnded={i === 0 ? handleEnded : undefined}
                      onTimeUpdate={i === 0 ? onTimeUpdate ? onTimeUpdate : handleTimeUpdate : undefined}>{i + 1}</AudioButton>
@@ -65,7 +65,7 @@ const marks = [
   {value: 100, label: '100'},
 ];
 
-export const MusharaRatingBar = observer(function (props: { audio: AudioFileModel }) {
+export const ApeRatingBar = observer(function (props: { audio: AudioFileModel }) {
   useEffect(() => {
     // Set a default value
     const num = parseInt(props.audio.value);
