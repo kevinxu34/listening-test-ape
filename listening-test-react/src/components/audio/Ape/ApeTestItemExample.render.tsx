@@ -2,6 +2,7 @@ import {observer} from "mobx-react";
 import {AudioExampleModel, AudioFileModel} from "../../../shared/models/AudioTestModel";
 import React, {useEffect, useState, forwardRef,useRef} from "react";
 import Grid from "@material-ui/core/Grid";
+import Container from "@material-ui/core/Container";
 import {SurveyControlRender} from "../../forms/SurveyControl.render";
 import {AudioButton, AudioController, useAudioPlayer} from "../../web-audio/AudiosPlayer";
 import {AudioLoading, useAllAudioRefsReady} from "../../web-audio/AudiosLoading";
@@ -23,35 +24,48 @@ export const ApeTestItemExampleRender = observer(function (props: { example: Aud
   const loading = useAllAudioRefsReady(allRefs);
   // An event for setting Time update method
   const [onTimeUpdate, setOnTimeUpdate] = useState<() => void>();
-
+  console.log(randomAudios);
   useEffect(() => {
     if (active === false) handlePause();
   }, [active]);
 
   return <> <AudioLoading showing={loading}/>
     <Grid container spacing={2} style={{display: loading ? 'none' : 'flex'}}>
-      {example.fields?.map((value, i) => <Grid item xs={12} key={i}>
+      {example.fields?.map((value, i) => 
+
+      <Grid item xs={12} key={i}>
         <SurveyControlRender control={value}/>
       </Grid>)}
 
-      {randomAudios.map((v, i) => 
-      <Grid item key={i} >
-        {/* <ApeRatingBar audio={v} audioNum = {i + 1}/> */}
-        <ApeAudioButton 
-                    ref={refs[i]} 
-                    audio={v} 
-                    audioNum={i+1}
-                    onPlay={handlePlay} 
-                    onPause={handlePause}
-                    onEnded={i === 0 ? handleEnded : undefined}
-                    onTimeUpdate={i === 0 ? onTimeUpdate ? onTimeUpdate : handleTimeUpdate : undefined}>{i + 1}</ApeAudioButton>
+      <Grid item xs={12}
+      style={{
+        position: 'relative', // 父容器需要相对定位
+        // width: '100%', // 设置容器的宽度
+        display: 'flex',
+        height: '120px', // 设置容器的高度
+      }}>
+        <Box   
+          style={{position: 'absolute',top: '60px',width: 'calc(100% - 16px)'
+        }}>
+          <HiddenSlider displayNumber={0} isActive={false} marks={marks}/>
 
-      </Grid>)}
+        </Box>
 
-      {/*Reference*/}
-      {example.mediaRef && <Grid item style={ratingAreaStyle}>
+        {randomAudios.map((v, i) => 
+        <Box   
+          style={{position: 'absolute',top: '60px',width: 'calc(100% - 16px)'
+        }}>
+          <ApeAudioButton ref={refs[i]} audio={v} audioNum={i+1}
+            onPlay={handlePlay} onPause={handlePause}onEnded={i === 0 ? handleEnded : undefined}
+            onTimeUpdate={i === 0 ? onTimeUpdate ? onTimeUpdate : handleTimeUpdate : undefined}>{i + 1}
+          </ApeAudioButton>
+
+        </Box>)}
+      </Grid >
+
+      {example.mediaRef && <Grid item xs={12} style={ratingAreaStyle}>
         <AudioButton ref={sampleRef} audio={example.mediaRef}  onPlay={handlePlay} onPause={handlePause}>Ref</AudioButton>
-        {/*{isDevMode() && <span>{sampleRef?.current?.currentTime}</span>}*/}
+
       </Grid>}
 
       <Grid item xs={12}>
@@ -74,56 +88,35 @@ const marks = [
   {value: 100, label: '100'},
 ];
 
-export const ApeRatingBar = observer(function (props: { audio: AudioFileModel ,audioNum:number}) {
-  useEffect(() => {
-    // Set a default value
-    const num = parseInt(props.audio.value);
-    if (!num) props.audio.value = '0';
-  });
-
-    return <>
-    <Box ml={2.5} mb={2} mt={2} style={{position: 'absolute',width: 200,height: 50}}>
-      <HiddenSlider
-
-          value={Number(props.audio.value)}
-          min={0}
-          max={100}
-          step={1}
-          marks={marks}
-          valueLabelDisplay="auto"
-          onChange={(_, value) => props.audio.value = value.toString()}
-          isActive={false}
-          displayNumber = {props.audioNum}
-
-        />
-
-    </Box>
-    </>
-  })
 
 const HiddenSlider = styled(Slider)(({ theme , isActive, displayNumber }: { 
   theme: any, 
   isActive: boolean,
   displayNumber : number, 
 }) => ({
+  pointerEvents: displayNumber==0?'none':'inherit',
+  zIndex: 1,
+  padding: 0,
+  height: 0,
   
   '& .MuiSlider-track': {
-    visibility: 'hidden', // 隐藏轨道
+    height: '0px',
   },
-  // '& .MuiSlider-rail': {
-  //   visibility: 'hidden', // 隐藏轨道背景
-  // },
+  '& .MuiSlider-rail': {
+    visibility: displayNumber!=0?'hidden':'inherit',
+  },
   
 
   '& .MuiSlider-thumb': {
     backgroundColor: isActive ? theme.palette.primary.main : theme.palette.common.white,
     border: `1px solid ${theme.palette.primary.main}`,
     // width: 6,
-    height: 64,
+    height: 56,
     borderRadius: 3,
-    transform: 'translateY(-27px)',
+    transform: 'translateY(-38px)',
     // display: 'none' ,
-    
+    zIndex: isActive ?10:9,
+    visibility: displayNumber==0?'hidden':'inherit',
     '&:before': {
       content: `"${displayNumber}"`,
       color: !isActive ? theme.palette.primary.main : theme.palette.common.white,
@@ -174,26 +167,26 @@ const ApeAudioButton = observer(
           onTimeUpdate={onTimeUpdate}
           onEnded={onEnded}
         />
-        <Box ml={2.5} mb={2} mt={2} style={{width: 200,height: 50}}>
+
         
-          <HiddenSlider
+        <HiddenSlider
 
-            value={Number(audio.value)}
-            min={0}
-            max={100}
-            step={1}
-            marks={marks}
-            valueLabelDisplay="auto"
-            onChange={(_, value) => audio.value = value.toString()}
+          value={Number(audio.value)}
+          min={0}
+          max={100}
+          step={1}
+          // marks={Number(audioNum)==0?marks:false}
+          valueLabelDisplay="auto"
+          onChange={(_, value) => audio.value = value.toString()}
 
-            isActive={audio.isActive}
-            displayNumber = {audioNum}
+          isActive={audio.isActive}
+          displayNumber = {audioNum}
 
-            onChangeCommitted={handleChangeCommited}
-            onMouseDown={() => setStartX(Number(audio.value))}
-            
-          />
-        </Box>
+          onChangeCommitted={handleChangeCommited}
+          onMouseDown={() => setStartX(Number(audio.value))}
+          
+        />
+
 
       </>
     );
