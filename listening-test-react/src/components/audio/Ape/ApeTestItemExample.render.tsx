@@ -94,16 +94,16 @@ const HiddenSlider = styled(Slider)(({ theme , isActive, displayNumber }: {
   isActive: boolean,
   displayNumber : number, 
 }) => ({
-  pointerEvents: displayNumber==0?'none':'inherit',
-  zIndex: 1,
+  pointerEvents: displayNumber===0?'none':'inherit',
+  // zIndex: 1,
   padding: 0,
   height: 0,
-  
+  zIndex: displayNumber===0?displayNumber:999-displayNumber,
   '& .MuiSlider-track': {
     height: '0px',
   },
   '& .MuiSlider-rail': {
-    visibility: displayNumber!=0?'hidden':'inherit',
+    visibility: displayNumber!==0?'hidden':'inherit',
   },
   
 
@@ -115,8 +115,9 @@ const HiddenSlider = styled(Slider)(({ theme , isActive, displayNumber }: {
     borderRadius: 3,
     transform: 'translateY(-38px)',
     // display: 'none' ,
-    zIndex: isActive ?10:9,
-    visibility: displayNumber==0?'hidden':'inherit',
+    
+
+    visibility: displayNumber===0?'hidden':'inherit',
     '&:before': {
       content: `"${displayNumber}"`,
       color: !isActive ? theme.palette.primary.main : theme.palette.common.white,
