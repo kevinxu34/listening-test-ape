@@ -98,7 +98,7 @@ const HiddenSlider = styled(Slider)(({ theme , isActive, displayNumber }: {
   // zIndex: 1,
   padding: 0,
   height: 0,
-  zIndex: displayNumber===0?displayNumber:999-displayNumber,
+  zIndex: isActive?999:(displayNumber===0?displayNumber:999-displayNumber),
   '& .MuiSlider-track': {
     height: '0px',
   },
