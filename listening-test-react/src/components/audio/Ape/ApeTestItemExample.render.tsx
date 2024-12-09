@@ -1,8 +1,8 @@
 import {observer} from "mobx-react";
 import {AudioExampleModel, AudioFileModel} from "../../../shared/models/AudioTestModel";
-import React, {useEffect, useState, forwardRef,useRef} from "react";
+import React, {useEffect, useState, forwardRef} from "react";
 import Grid from "@material-ui/core/Grid";
-import Container from "@material-ui/core/Container";
+// import Container from "@material-ui/core/Container";
 import {SurveyControlRender} from "../../forms/SurveyControl.render";
 import {AudioButton, AudioController, useAudioPlayer} from "../../web-audio/AudiosPlayer";
 import {AudioLoading, useAllAudioRefsReady} from "../../web-audio/AudiosLoading";
@@ -10,9 +10,9 @@ import {useRandomization} from "../../../shared/tools/RandomizationTools";
 import {ratingAreaStyle} from "../../../shared/SharedStyles";
 import {AudioSectionLoopingController} from "../../web-audio/AudioSectionLoopingController";
 import {Box, Slider, styled } from "@material-ui/core";
-import { trace } from "console";
-import Button from '@material-ui/core/Button';
-import { values } from "mobx";
+// import { trace } from "console";
+// import Button from '@material-ui/core/Button';
+// import { values } from "mobx";
 
 export const ApeTestItemExampleRender = observer(function (props: { example: AudioExampleModel, active?: boolean }) {
   const {example, active} = props;
@@ -27,7 +27,7 @@ export const ApeTestItemExampleRender = observer(function (props: { example: Aud
   console.log(randomAudios);
   useEffect(() => {
     if (active === false) handlePause();
-  }, [active]);
+  }, [active, handlePause]);
 
   return <> <AudioLoading showing={loading}/>
     <Grid container spacing={2} style={{display: loading ? 'none' : 'flex'}}>
@@ -151,7 +151,7 @@ const ApeAudioButton = observer(
     const handleChangeCommited = (event: React.ChangeEvent<{}>, value: number | number[]) => {
       // audio.value = value.toString();  // 将滑块的值转换为字符串并赋值给 audio.value
       // console.log("change: "+audio.value)
-      if (Number(audio.value) == startX) {
+      if (Number(audio.value) === startX) {
         // console.log("switch!")
         audio.isActive ? onPause() : onPlay(audio);
       }
