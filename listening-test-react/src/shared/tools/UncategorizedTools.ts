@@ -1,7 +1,7 @@
 import Axios, {AxiosRequestConfig} from "axios";
 
 const DEV_HOST = 'http://localhost:3000';
-const PRODUCTION_HOST = 'https://golisten.ucd.ie';
+const PRODUCTION_HOST = 'http://localhost';
 
 export function isDevMode() {
   return !process.env.NODE_ENV || process.env.NODE_ENV === 'development';
