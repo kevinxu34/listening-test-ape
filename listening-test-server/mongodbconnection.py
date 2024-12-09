@@ -38,7 +38,7 @@ def create_default_user():
     default_user = {
         'name': 'admin',
         'password': 'e10adc3949ba59abbe56e057f20f883e',
-        'email': 'admin@yourdomain.com',
+        'email': 'i@wr.fyi',
         'isAdmin': True,
         'permissions': permission_list,
         'activated': True
