@@ -6,3 +6,5 @@ node_modules
 *.pem
 
 /listening-test-react/build
+
+/listening-test-react/package-lock.json
